@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<head>
+    <title>QuizApp</title>
+    <link th:href="@{/css/home.css}" rel="stylesheet" />
+</head>
+<body>
+<div class="wrapper">
+    <nav style="margin-left: 10px">
+        <input type="checkbox" id="show-menu">
+        <label for="show-menu" class="menu-icon">
+            <i class="fas fa-bars"></i>
+        </label>
+        <div class="content">
+            <div class="logo">
+                <a href="/home">Quiz App</a>
+            </div>
+            <ul class="links">
+                <li style="margin-left:270px">
+                    <a sec:authorize="!isAuthenticated()" href="/login">Login</a>
+                </li>
+                <li>
+                    <a sec:authorize="!isAuthenticated()" href="/register">Register</a>
+                </li>
+                <li style="margin-left:70px">
+                    <a sec:authorize="isAuthenticated()" href="/history">History</a>
+                </li>
+                <a sec:authorize="isAuthenticated()" href="/logout">
+                    <button class="responsive-button" style="margin-left:-40px">Logout</button>
+                </a>
+            </ul>
+        </div>
+    </nav>
+</div>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1 style="text-align:center"> Welcome to my quiz app</h1>
+<br>
+<h2 style="text-align:center">Please choose a category</h2>
+<div sec:authorize="isAuthenticated()" class="container">
+    <div class="box">
+        <div class="imgBx">
+            <img src="https://images.unsplash.com/photo-1521295121783-8a321d551ad2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80">
+        </div>
+        <div class="content">
+            <div>
+                <a href="/quizList/1" style="color:#318ce7">Geography</a>
+                <p> There are  [[${geographyTests}]] Geography related tests. Please enjoy. </p>
+            </div>
+        </div>
+    </div>
+    <!-- Div with background image -->
+    <div class="box">
+        <div class="imgBx">
+            <img src="https://plus.unsplash.com/premium_photo-1682125784386-d6571f1ac86a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1816&q=80">
+        </div>
+        <div class="content">
+            <div>
+                <a href="/quizList/2" style="color:#fe6f5e">History</a>
+                <p>There are  [[${historyTests}]] History related tests. Please enjoy. </p>
+            </div>
+        </div>
+    </div>
+</div>
+<br>
+<div sec:authorize="!isAuthenticated()" class="centered-text"> Please Login or Register if you don't have an account. </div>
+<br>
+<br>
+</body>
+</html>

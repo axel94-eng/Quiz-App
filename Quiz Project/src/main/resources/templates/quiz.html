@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<head>
+    <title>Quiz title</title>
+    <link th:href="@{/css/quiz.css}" rel="stylesheet" />
+</head>
+<body>
+<div class="wrapper">
+    <nav style="margin-left: 10px">
+        <input type="checkbox" id="show-menu">
+        <label for="show-menu" class="menu-icon">
+            <i class="fas fa-bars"></i>
+        </label>
+        <div class="content">
+            <div class="logo">
+                <a href="/home">Quiz App</a>
+            </div>
+            <ul class="links">
+                <li style="margin-left:230px">
+                    <a sec:authorize="isAuthenticated()" href="/home">Home</a></li>
+                <li>
+                    <a sec:authorize="isAuthenticated()" th:href="@{/quizList/{id}(id=${domainId})}">Quiz List</a>
+                </li>
+                <li>
+                    <a sec:authorize="isAuthenticated()" href="/history">History</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</div>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p th:text="${quiz.title}" style="text-align: center;
+   font-style: italic;
+   color:#2f847c; font-size:20px"></p>
+<br>
+<form action="#" th:action="@{/submitQuiz/{id}(id=${quiz.id})}" th:object="${formQuiz}" method="post">
+    <div th:each="question, itemStat: ${questions}" class="form-group">
+        <p th:text="${question.description}" style="text-align:center; font-style: italic;
+           color:#614051; font-size:18px"></p>
+        <input type="hidden" th:value="${question.id}" th:attr="name='questionsRequest[__${itemStat.index}__].questionId'" class="animated-radio">
+        <div class="radio-container">
+            <input type="hidden" th:value="${question.id}" th:attr="name='questionsRequest[__${itemStat.index}__].questionId'" class="animated-radio">
+            <input type="radio" id="1" th:field="*{questionsRequest[__${itemStat.index}__].option}" value="1" class="animated-radio">
+            <label for="1" th:text="${question.optionOne}" class="animated-radio"></label>
+        </div>
+        <div class="radio-container">
+            <input type="radio" id="2" th:field="*{questionsRequest[__${itemStat.index}__].option}" value="2" class="animated-radio">
+            <label for="2" th:text="${question.optionTwo}" class="animated-radio"></label>
+        </div>
+        <div class="radio-container">
+            <input type="radio" id="3" th:field="*{questionsRequest[__${itemStat.index}__].option}" value="3" class="animated-radio">
+            <label for="3" th:text="${question.optionThree}" class="animated-radio"></label>
+        </div>
+        <div class="radio-container">
+            <input type="radio" id="4" th:field="*{questionsRequest[__${itemStat.index}__].option}" value="4" class="animated-radio">
+            <label for="4" th:text="${question.optionFour}" class="animated-radio"></label>
+        </div>
+    </div>
+    <br>
+    <button type="submit" value="submit" class="btn btn-success">Submit Quiz</button>
+</form>
+</body>
+</html>

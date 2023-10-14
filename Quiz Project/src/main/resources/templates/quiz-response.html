@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title>QuizApp</title>
+    <script src=https://code.jquery.com/jquery-3.6.0.min.js></script>
+    <link th:href="@{/css/quiz-response.css}" rel="stylesheet" />
+    <script type="text/javascript" th:src="@{/js/quiz_response.js}"></script>
+</head>
+<body>
+<div class="wrapper">
+    <nav style="margin-left: 10px">
+        <input type="checkbox" id="show-search">
+        <input type="checkbox" id="show-menu">
+        <label for="show-menu" class="menu-icon">
+            <i class="fas fa-bars"></i>
+        </label>
+        <div class="content">
+            <div class="logo">
+                <a href="/home">Quiz App</a>
+            </div>
+            <ul class="links">
+                <li style="margin-left: 290px">
+                    <a sec:authorize="isAuthenticated()" href="/home">Home</a>
+                </li>
+                <li>
+                    <a sec:authorize="isAuthenticated()" href="/history">History</a>
+                </li>
+                <a sec:authorize="isAuthenticated()" href="/logout">
+                    <button class="responsive-button" style="margin-left:-40px">Logout</button>
+                </a>
+
+            </ul>
+        </div>
+    </nav>
+</div>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p th:text="'Score:'+${response.score}+'/10'" style="text-align: center;
+   font-style: bold; font-size:30px;  color:#104e8b"></p>
+<br>
+<div class="container" th:each="question : ${response.questions}">
+    <p th:text="${question.description}" style="text-align: center;
+   font-style: italic;
+   color:#4a646c; font-size:20px"></p>
+    <div class="radio-container">
+        <input type="radio" id="1" value="1" th:checked="${question.userOption} eq 1">
+        <label style="text-align: center;" for="1" th:text="${question.optionOne}" th:style="${question.answer} == 1 ? 'background-color: green' : ''"></label>
+    </div>
+    <div class="radio-container">
+        <input type="radio" id="2" value="2" th:checked="${question.userOption} eq 2">
+        <label for="2" th:text="${question.optionTwo}" th:style="${question.answer} == 2 ? 'background-color: green' : ''"></label>
+    </div>
+    <div class="radio-container">
+        <input type="radio" id="3" value="3" th:checked="${question.userOption} eq 3">
+        <label for="3" th:text="${question.optionThree}" th:style="${question.answer} == 3 ? 'background-color: green' : ''"></label>
+    </div>
+    <div class="radio-container">
+        <input type="radio" id="4" value="4" th:checked="${question.userOption} eq 4">
+        <label for="4" th:text="${question.optionFour}" th:style="${question.answer} == 4 ? 'background-color: green' : ''"></label>
+    </div>
+    </div>
+</body>
+</html>

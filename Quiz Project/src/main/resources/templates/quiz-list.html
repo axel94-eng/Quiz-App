@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+
+<head>
+    <title>QuizApp</title>
+    <link th:href="@{/css/quiz-list.css}" rel="stylesheet" />
+</head>
+<body>
+<div class="wrapper">
+    <nav style="margin-left: 10px">
+        <input type="checkbox" id="show-menu">
+        <label for="show-menu" class="menu-icon">
+            <i class="fas fa-bars"></i>
+        </label>
+        <div class="content">
+            <div class="logo">
+                <a href="/home">Quiz App</a>
+            </div>
+            <ul class="links">
+                <li style="margin-left:150px">
+                    <a sec:authorize="!isAuthenticated()" href="/login">Login</a>
+                </li>
+                <li>
+                    <a sec:authorize="!isAuthenticated()" href="/register">Register</a>
+                </li>
+                <li style="margin-left:80px">
+                    <a sec:authorize="isAuthenticated()" href="/home">Home</a>
+                </li>
+                <li>
+                    <a sec:authorize="isAuthenticated()" href="/history">History</a>
+                </li>
+                <a sec:authorize="isAuthenticated()" href="/logout">
+                    <button class="responsive-button" style="margin-left:-40px">Logout</button>
+                </a>
+            </ul>
+        </div>
+    </nav>
+</div>
+<br>
+<br>
+<br>
+<br>
+<div class="slider">
+    <div class="slide"></div>
+    <div class="slide"></div>
+    <div class="slide"></div>
+    <div class="slide"></div>
+    <div class="slide"></div>
+    <div class="slide"></div>
+    <div class="slide"></div>
+</div>
+<div class="slider-text">
+    <div th:each="quiz: ${quizzes}">
+        <p style=" text-align:center">
+            <a class="btn" th:href="@{/quiz/{id}(id=${quiz.id})}" th:text="${quiz.title}"></a>
+        </p>
+    </div>
+</div>
+</body>
+</html>

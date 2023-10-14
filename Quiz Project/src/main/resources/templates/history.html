@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<head>
+    <title>QuizApp</title>
+    <link th:href="@{/css/history.css}" rel="stylesheet" />
+<body>
+<div class="wrapper">
+    <nav style="margin-left: 10px">
+        <input type="checkbox" id="show-menu">
+        <label for="show-menu" class="menu-icon">
+            <i class="fas fa-bars"></i>
+        </label>
+        <div class="content">
+            <div class="logo">
+                <a href="/home">Quiz App</a>
+            </div>
+            <ul class="links">
+                <li style="margin-left:270px">
+                    <a sec:authorize="isAuthenticated()" href="/home">Home</a>
+                </li>
+                <a sec:authorize="isAuthenticated()" href="/logout">
+                    <button class="responsive-button" style="margin-left:-40px">Logout</button>
+                </a>
+            </ul>
+        </div>
+    </nav>
+</div>
+<br>
+<br>
+<br>
+<br>
+<br>
+<section class="todo" style="margin-right:auto;
+    margin-left:auto;">
+    <h1>Quiz History</h1>
+    <br>
+    <p>Quizzes solved / Total number of quizzes: [[${nrQuizzesSolved}]] / [[${nrOfQuizzes}]]</p>
+    <ul th:each="element : ${history}">
+        <li th:text="${element.key}"></li>
+        <ul th:each="obj : ${element.value}">
+            <li>
+                <p>[[${obj.quizTitle}]]</p>
+                <p th:text="${obj.score} + '/10'"></p>
+            </li>
+        </ul>
+    </ul>
+</section>
+</body>
+</html>

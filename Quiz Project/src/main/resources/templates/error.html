@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<head>
+
+    <link th:href="@{/css/home.css}" rel="stylesheet" />
+</head>
+<body>
+
+<div class="wrapper">
+    <nav style="margin-left: 10px">
+        <input type="checkbox" id="show-menu">
+        <label for="show-menu" class="menu-icon">
+            <i class="fas fa-bars"></i>
+        </label>
+        <div class="content">
+            <div class="logo">
+                <a href="/home">Quiz App</a>
+            </div>
+            <ul class="links">
+                <li style="margin-left:100px">
+                    <a sec:authorize="!isAuthenticated()" href="/home">Home</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</div>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Something went wrong! </h1>
+<h2>Press home button to return to homepage.</h2>
+</body>
+</html>
